@@ -1,7 +1,14 @@
 # nodejs
+
 I tried to practice Node.js and React with JavaScript
 
+### Practie file
+
+- book
+- self-study
+
 ### Technology stack
+
 - Node.js & express
 - MongoDB, PostgreSQL
 - Redux
@@ -11,6 +18,7 @@ I tried to practice Node.js and React with JavaScript
 - user authentication with jwt and cookies
 
 ### used
+
 - Real time interaction
 - WebSocket
 - Token
