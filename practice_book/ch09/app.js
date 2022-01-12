@@ -35,7 +35,7 @@ sequelize
 passportConfig();
 
 // view template set
-app.engine("html", require("ejs").renderFile);
+// app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
 nunjucks.configure("views", {
   express: app,
