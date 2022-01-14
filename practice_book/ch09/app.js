@@ -16,6 +16,8 @@ const PORT = 8080;
 // route
 const pageRouter = require("./routes/page");
 const authRouter = require("./routes/auth");
+const postRouter = require("./routes/post");
+const userRouter = require("./routes/user");
 
 // dotenv setting
 dotenv.config();
@@ -67,6 +69,8 @@ app.use(passport.session());
 // routing setting
 app.use("/", pageRouter);
 app.use("/auth", authRouter);
+app.use("/post", postRouter);
+app.use("/user", userRouter);
 
 // 404 middleware
 app.use((err, req, res, next) => {
