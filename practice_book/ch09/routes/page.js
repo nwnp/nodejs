@@ -56,15 +56,15 @@ router.get("/", async (req, res, next) => {
       },
       order: [["createdAt", "DESC"]],
     });
-    console.log("error 어딨냐 2");
+    // console.log("error 어딨냐 2");
     console.log(`posts------------------------------\n${posts}`);
     res.render("main", {
       title: "jin's page",
       twits: posts,
     });
-    console.log("error 어딨냐 3");
+    // console.log("error 어딨냐 3");
   } catch (err) {
-    console.log("error 어딨냐");
+    // console.log("error 어딨냐");
     console.error(`routes/page.js router.get('/') error: ${err}`);
     next(err);
   }
