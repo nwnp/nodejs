@@ -15,6 +15,7 @@ const authRouter = require("./routes/auth");
 const indexRouter = require("./routes");
 const { sequelize } = require("./models");
 const passportConfig = require("./passport");
+const v1 = require("./routes/v1");
 
 passportConfig();
 app.set("port", process.env.PORT || 8081);
@@ -52,6 +53,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use("/v1", v1);
 app.use("/auth", authRouter);
 app.use("/", indexRouter);
 
