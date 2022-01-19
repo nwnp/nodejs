@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.post("/token", async (req, res, next) => {
   const { clientSecret } = req.body;
+  console.log(`req.body ------ ${req.body}`);
   console.log(clientSecret);
   try {
     const domain = await Domain.findOne({
