@@ -1,10 +1,14 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 
+// 기존 v1 라우터를 사용할 때 경고창을 띄우기 위한 deprecated
 const { verifyToken } = require("./middlewares");
 const { Domain, User } = require("../models");
 
 const router = express.Router();
+
+// deprecated
+// router.use(deprecated());
 
 router.post("/token", async (req, res, next) => {
   const { clientSecret } = req.body;

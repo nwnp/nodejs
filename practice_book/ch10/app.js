@@ -9,6 +9,8 @@ const dotenv = require("dotenv");
 
 const app = express();
 
+const PORT = 8081;
+
 dotenv.config();
 
 const authRouter = require("./routes/auth");
@@ -16,6 +18,7 @@ const indexRouter = require("./routes");
 const { sequelize } = require("./models");
 const passportConfig = require("./passport");
 const v1 = require("./routes/v1");
+const v2 = require("./routes/v2");
 
 passportConfig();
 app.set("port", process.env.PORT || 8081);
@@ -54,6 +57,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/v1", v1);
+app.use("/v2", v2);
 app.use("/auth", authRouter);
 app.use("/", indexRouter);
 
@@ -70,6 +74,6 @@ app.use((err, req, res, next) => {
   res.render("error");
 });
 
-app.listen(app.get("port"), (req, res, next) => {
-  console.log(`8081번에서 대기중...`);
+app.listen(PORT, (req, res, next) => {
+  console.log(PORT, `번에서 대기중...`);
 });
