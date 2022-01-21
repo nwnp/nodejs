@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>chat</title>
+  </head>
+  <body>
+    <div>개발자 탭으로 network 탭 확인</div>
+    <script>
+      const webSocket = new WebSocket("ws://localhost:8080");
+      webSocket.onopen = function () {
+        console.log("서버와 웹 소켓 연결 성공!");
+      };
+      webSocket.onmessage = function (event) {
+        console.log("views/index.html", event.data);
+        webSocket.send("client : 클라이언트에서 서버로 답장을 보냄");
+      };
+    </script>
+  </body>
+</html>
