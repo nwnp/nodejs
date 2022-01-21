@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>socket.io</title>
+  </head>
+  <body>
+    <div>개발자 탭 확인</div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io.connect("http://localhost:8080", {
+        path: "/socket.io",
+      });
+      socket.on("news", function (data) {
+        console.log(data);
+        socket.emit("reply", "client : hello node.js");
+      });
+    </script>
+  </body>
+</html>

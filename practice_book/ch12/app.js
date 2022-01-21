@@ -8,7 +8,8 @@ const path = require("path");
 const app = express();
 
 // websocket middleware
-const webSocket = require("./socket");
+// const webSocket = require("./socket");
+const webSocket = require("./socket2");
 
 // PORT
 const PORT = 8080;
