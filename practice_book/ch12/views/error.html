@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Error page</title>
-  </head>
-  <body>
-    <h1>{{message}}</h1>
-    <h2>{{error.status}}</h2>
-    <pre>{{error.stack}}</pre>
-  </body>
-</html>
+{% extends 'layout.html' %} {%block content%}
+<h1>{{message}}</h1>
+<h2>{{error.status}}</h2>
+<pre>{{error.stack}}</pre>
+{% endblock %}

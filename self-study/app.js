@@ -6,9 +6,12 @@ const userRouter = express.Router();
 const app = express();
 const PORT = 8080;
 
-app.get("/", (req, res, next) => {
-  res.send("root - get");
-});
+app.set("views");
+app.set("view engine", "pug");
+
+// app.get("/", (req, res, next) => {
+//   res.send("root - get");
+// });
 
 userRouter.param("id", (req, res, next, value) => {
   console.log(value);
@@ -33,6 +36,10 @@ userRouter.post("/:id", (req, res, next) => {
 });
 
 app.use("/users", userRouter);
+
+app.get("/", (req, res, next) => {
+  res.render("index");
+});
 
 app.listen(PORT, () => {
   console.log(`${PORT}번에서 대기중...`);

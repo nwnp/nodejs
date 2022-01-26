@@ -7,6 +7,9 @@ const nunjucks = require("nunjucks");
 const path = require("path");
 const app = express();
 
+// connection with mongodb
+const connect = require("./schemas");
+
 // websocket middleware
 // const webSocket = require("./socket");
 const webSocket = require("./socket2");
@@ -23,6 +26,9 @@ nunjucks.configure("views", {
   express: app,
   watch: true,
 });
+
+// connection with mongodb
+connect();
 
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
