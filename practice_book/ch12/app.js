@@ -6,6 +6,7 @@ const session = require("express-session");
 const nunjucks = require("nunjucks");
 const path = require("path");
 const app = express();
+const ColorHash = require("color-hash");
 
 // connection with mongodb
 const connect = require("./schemas");
@@ -30,22 +31,31 @@ nunjucks.configure("views", {
 // connection with mongodb
 connect();
 
+// Socket.IO middleware
+const sessionMiddleware = session({
+  resave: false,
+  saveUninitialized: false,
+  secret: process.env.COOKIE_SECRET,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+  },
+});
+
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(
-  session({
-    resave: false,
-    saveUninitialized: false,
-    secret: process.env.COOKIE_SECRET,
-    cookie: {
-      httpOnly: true,
-      secure: false,
-    },
-  })
-);
+app.use(sessionMiddleware);
+
+// app.use((req, res, next) => {
+//   if (!req.session.color) {
+//     const colorHash = new ColorHash();
+//     req.session.color = colorHash.hex(req.sessionID);
+//   }
+//   next();
+// });
 
 // routing
 app.use("/", indexRouter);
@@ -69,4 +79,6 @@ const server = app.listen(PORT, () => {
   console.log(PORT, "번에서 대기중...");
 });
 
-webSocket(server);
+// socket 간에 express-session 미들웨어를 공유하기 위해
+// 인자로 같이 넣어줌
+webSocket(server, app, sessionMiddleware);

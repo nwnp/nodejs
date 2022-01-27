@@ -1,32 +1,65 @@
+const { default: axios } = require("axios");
 const SocketIO = require("socket.io");
 
-module.exports = (server) => {
+module.exports = (server, app, sessionMiddleware) => {
   const io = SocketIO(server, { path: "/socket.io" });
 
-  io.on("connection", (socket) => {
-    const req = socket.request;
+  app.set("io", io);
 
-    const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
-    console.log("new client access", ip, socket.id, req.ip);
+  const room = io.of("/room");
+  const chat = io.of("/chat");
 
-    // 연결 종료 시
+  //
+  io.use((socket, next) => {
+    sessionMiddleware(socket.request, socket.request, next);
+  });
+
+  room.on("connection", (socket) => {
+    console.log("room 네임스페이스에 접속");
     socket.on("disconnect", () => {
-      console.log("disconnect client access", ip, socket.id);
+      console.log("room 접속 해제");
+    });
+  });
+
+  chat.on("connection", (socket) => {
+    console.log("chat 네임스페이스에 접속");
+    const req = socekt.request;
+    const {
+      headers: { referer },
+    } = req;
+    const roomId = referer
+      .split("/")
+      [referer.split("/").length - 1].replace(/\?.+/, "");
+    socket.join(roomId);
+
+    //
+    socket.to(roomId).emit("join", {
+      user: "system",
+      chat: `${req.session.color}님이 입장하셨습니다.`,
     });
 
-    // 에러 발생 시
-    socket.on("error", (err) => {
-      console.log(`socket2.js error - ${err}`);
-    });
+    socket.on("disconnect", () => {
+      console.log("chat 네임스페이스 접속 해제");
+      socket.leave(roomId);
 
-    // 클라이언트로부터 메시지를 받을 때
-    socket.on("reply", (data) => {
-      console.log("socket2.js -", data);
+      //
+      const currentRoom = socket.adapter.rooms[roomId];
+      const userCount = currentRoom ? currentRoom.length : 0;
+      if (userCount === 0) {
+        axios
+          .delete(`http://localhost:8080/room/${roomId}`)
+          .then(() => {
+            console.log("방 제거 요청 성공");
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      } else {
+        socket.to(roomId).emit("exit", {
+          user: "system",
+          chat: `${req.session.color}님이 퇴장하셨습니다.`,
+        });
+      }
     });
-
-    // 3초마다 클라이언트에 메시지를 보냄
-    socket.interval = setInterval(() => {
-      socket.emit("news", "server : hello Socket.IO");
-    }, 3000);
   });
 };

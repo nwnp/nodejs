@@ -19,8 +19,8 @@
 .other div:first-child {
   font-size: 12px;
 }
-.min div:last-child,
-.otehr div:last-child {
+.mine div:last-child,
+.other div:last-child {
   display: inline-block;
   border: 1px solid silver;
   border-radius: 5px;
@@ -42,7 +42,7 @@
 }
 label[for="gif"],
 #chat,
-#chat-form[type="submit"] {
+#chat-form [type="submit"] {
   display: inline-block;
   height: 30px;
   vertical-align: top;

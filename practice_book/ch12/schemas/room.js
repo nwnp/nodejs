@@ -12,10 +12,10 @@ const roomSchema = new Schema({
     default: 10,
     min: 2,
   },
-  owner: {
-    type: String,
-    required: true,
-  },
+  // owner: {
+  //   type: String,
+  //   required: true,
+  // },
   password: String,
   createdAt: {
     type: Date,
