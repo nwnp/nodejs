@@ -59,8 +59,9 @@ router.post("/login", async (req, res, next) => {
     const match = bcrypt.compareSync(password, finded.password);
     if (match) {
       res.send("success login");
+      console.log(`${userId} 로그인 성공`);
     } else {
-      res.send("error");
+      res.send("비밀번호가 틀렸습니다.");
     }
   } catch (err) {
     console.error(`/login err: ${err}`);
