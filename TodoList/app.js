@@ -58,6 +58,7 @@ app.use((err, req, res, next) => {
   res.send(err.message);
 });
 
+// not found
 app.use((req, res, next) => {
   console.log("cannot found");
   res.status(404).send("Not Found");
