@@ -1,5 +1,4 @@
 const express = require("express");
-const dotenv = require("express");
 const morgan = require("morgan");
 // const multer = require("multer");
 const path = require("path");
@@ -8,6 +7,10 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const nunjucks = require("nunjucks");
 // const sequelize = require("sequelize");
+
+// passport
+// const passport = require("passport");
+// const passportConfig = require('./passport')
 
 const app = express();
 const PORT = 8080;
@@ -38,17 +41,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(
-  session({
-    resave: false,
-    saveUninitialized: false,
-    secret: process.env.COOKIE_SECRET,
-    cookie: {
-      httpOnly: true,
-      secure: false,
-    },
-  })
-);
+// app.use(
+//   session({
+//     resave: false,
+//     saveUninitialized: false,
+//     secret: process.env.COOKIE_SECRET,
+//     cookie: {
+//       httpOnly: true,
+//       secure: false,
+//     },
+//   })
+// );
 
 app.use("/", indexRoute);
 
