@@ -6,12 +6,20 @@
   <body>
     <p>login</p>
     <div>
-      <div>id <input type="text" /></div>
-      <div>pwd <input type="text" /></div>
-      <div>
-        <button>next</button>
-        <button>join</button>
-      </div>
+      <form>
+        <fieldset>
+          <legend>LOGIN</legend>
+          id <input type="text" name="id" /> pwd<input
+            type="text"
+            name="password"
+          />
+          <div>
+            <br />
+            <button type="submit" name="">NEXT</button>
+            <button type="button" onclick="location.href='join'">JOIN</button>
+          </div>
+        </fieldset>
+      </form>
     </div>
   </body>
 </html>
