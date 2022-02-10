@@ -21,6 +21,7 @@ const PORT = 8080;
 
 // routing
 const indexRoute = require("./routes/index");
+const authRouter = require("./routes/auth");
 
 // connect database
 const { sequelize } = require("./models");
@@ -61,6 +62,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/", indexRoute);
+app.use("/auth", authRouter);
 
 // error
 app.use((err, req, res, next) => {
@@ -73,6 +75,14 @@ app.use((req, res, next) => {
   console.log("cannot found");
   res.status(404).send("Not Found");
 });
+
+// error middleware
+// app.use((err, req, res, next) => {
+//   res.locals.message = err.message;
+//   res.locals.error = process.env.NODE_ENV !== "production" ? err : {};
+//   res.status(err.status || 500);
+//   res.render("error");
+// });
 
 app.listen(PORT, () => {
   console.log(PORT, "번에서 대기중");

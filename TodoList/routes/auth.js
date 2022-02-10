@@ -5,10 +5,11 @@ const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 
 const router = express.Router();
 
-router.post("/join", isNotLoggedIn, async (req, res, next) => {
+router.post("/join", async (req, res, next) => {
   const { userId, password, email, nickname } = req.body;
+  console.log(userId, password, email, nickname);
   try {
-    const exUser = await User.findOne({ where: userId });
+    const exUser = await User.findOne({ where: { userId: userId } });
     if (!exUser) {
       const hash = await bcrypt.hash(password, 12);
       await User.create({
@@ -22,7 +23,7 @@ router.post("/join", isNotLoggedIn, async (req, res, next) => {
       res.send("이미 가입되어 있는 아이디");
     }
   } catch (err) {
-    console.error(`create err`);
+    console.error(`----------------create err ${err}`);
     next(err);
   }
 });
@@ -46,3 +47,5 @@ router.post("/login", isNotLoggedIn, async (req, res, next) => {
     });
   })(req, res, next);
 });
+
+module.exports = router;
