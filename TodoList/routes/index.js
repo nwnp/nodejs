@@ -1,6 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
+const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 
 const router = express.Router();
 
@@ -26,32 +27,6 @@ router.get("/join", (req, res, next) => {
 
 router.get("/login/:id", (req, res, next) => {
   res.send(req.params.id);
-});
-
-/** POST */
-// /join
-// login
-// checkid
-router.post("/join", async (req, res, next) => {
-  const { userId, password, email, nickname } = req.body;
-  try {
-    const findedId = await User.findOne({ where: { userId: userId } });
-    if (!findedId) {
-      const hash = await bcrypt.hash(password, 12);
-      await User.create({
-        userId,
-        password: hash,
-        email,
-        nickname,
-      });
-      return res.redirect("/login");
-    } else {
-      res.send("이미 가입되어 있는 아이디");
-    }
-  } catch (err) {
-    console.error(`create err`);
-    next(err);
-  }
 });
 
 router.post("/login", async (req, res, next) => {

@@ -7,6 +7,10 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const nunjucks = require("nunjucks");
 // const sequelize = require("sequelize");
+const passport = require("passport");
+const passportConfig = require("./passport");
+
+passportConfig();
 
 // passport
 // const passport = require("passport");
@@ -41,17 +45,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
-// app.use(
-//   session({
-//     resave: false,
-//     saveUninitialized: false,
-//     secret: process.env.COOKIE_SECRET,
-//     cookie: {
-//       httpOnly: true,
-//       secure: false,
-//     },
-//   })
-// );
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: "cookiesecret",
+    cookie: {
+      httpOnly: true,
+      secure: false,
+    },
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/", indexRoute);
 
