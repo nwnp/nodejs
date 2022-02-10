@@ -10,16 +10,24 @@
         <fieldset>
           <legend>LOGIN</legend>
           id <input type="text" name="id" /> pwd<input
-            type="text"
+            type="password"
             name="password"
           />
           <div>
             <br />
-            <button type="submit" name="">NEXT</button>
+            <button type="submit" name="next" onclick="clickFunc()">
+              NEXT
+            </button>
             <button type="button" onclick="location.href='join'">JOIN</button>
           </div>
         </fieldset>
       </form>
     </div>
+
+    <script>
+      function clickFunc() {
+        alert("clicked button");
+      }
+    </script>
   </body>
 </html>

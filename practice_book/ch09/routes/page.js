@@ -20,13 +20,6 @@ router.use((req, res, next) => {
   next();
 });
 
-// GET /
-// router.get("/", (req, res, next) => {
-//   res.render("main", { title: "jin's page" });
-//   console.log(`\npage.js: ${req.method} ${req.url} - log`);
-//   // res.send("라우팅 테스트");
-// });
-
 // GET /profile
 router.get("/profile", isLoggedIn, (req, res, next) => {
   res.render("profile", { title: "profile page" });
@@ -46,9 +39,7 @@ router.get("/join", isNotLoggedIn, (req, res, next) => {
 // 게시글 작성 기능 추가
 // 메인 페이지 로딩 시 메인 페이지와 게시글을 함게 로딩
 router.get("/", async (req, res, next) => {
-  // res.render("main", { title: "jin's page" });
   try {
-    console.log("error 어딨냐 1");
     const posts = await Post.findAll({
       include: {
         model: User,
@@ -56,15 +47,11 @@ router.get("/", async (req, res, next) => {
       },
       order: [["createdAt", "DESC"]],
     });
-    // console.log("error 어딨냐 2");
-    console.log(`posts------------------------------\n${posts}`);
     res.render("main", {
       title: "jin's page",
       twits: posts,
     });
-    // console.log("error 어딨냐 3");
   } catch (err) {
-    // console.log("error 어딨냐");
     console.error(`routes/page.js router.get('/') error: ${err}`);
     next(err);
   }

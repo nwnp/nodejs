@@ -24,9 +24,14 @@ router.get("/join", (req, res, next) => {
   console.log("GET /join");
 });
 
+router.get("/login/:id", (req, res, next) => {
+  res.send(req.params.id);
+});
+
 /** POST */
 // /join
 // login
+// checkid
 router.post("/join", async (req, res, next) => {
   const { userId, password, email, nickname } = req.body;
   try {
@@ -39,7 +44,7 @@ router.post("/join", async (req, res, next) => {
         email,
         nickname,
       });
-      return res.redirect("/");
+      return res.redirect("/login");
     } else {
       res.send("이미 가입되어 있는 아이디");
     }
@@ -66,6 +71,19 @@ router.post("/login", async (req, res, next) => {
   } catch (err) {
     console.error(`/login err: ${err}`);
     next(err);
+  }
+});
+
+router.post("/checkid", async (req, res, next) => {
+  const checkingId = req.params.userId;
+  console.log(checkingId);
+
+  const userId = await User.findAll({ where: { id: checkingId } });
+  if (userId) {
+    console.log(userId);
+    res.send(userId);
+  } else {
+    res.send("error");
   }
 });
 
