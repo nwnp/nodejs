@@ -18,7 +18,7 @@ router.post("/join", async (req, res, next) => {
         email,
         nickname,
       });
-      return res.redirect("/login");
+      return res.redirect("/");
     } else {
       res.send("이미 가입되어 있는 아이디");
     }
