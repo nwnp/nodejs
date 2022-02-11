@@ -41,7 +41,7 @@ router.post("/login", isNotLoggedIn, async (req, res, next) => {
         return next(loginError);
       }
       // return res.send("post login page");
-      return res.redirect("/");
+      return res.redirect("join");
     });
   })(req, res, next);
   // res.send("post login page");

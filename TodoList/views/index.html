@@ -1,9 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <title>index</title>
+    <title>LOGIN</title>
   </head>
   <body>
-    <p>index</p>
+    <h1>LOGIN PAGE</h1>
+    <div>
+      <form id="login-form" action="/auth/login" method="post">
+        <div class="input-group">
+          <label for="login-id">id</label>
+          <input id="login-id" type="text" name="userId" />
+        </div>
+        <div class="input-group">
+          <label for="login-password">password</label>
+          <input type="password" id="login-password" name="password" />
+        </div>
+        <div>
+          <button type="submit">LOGIN</button>
+          <button type="button" onclick="location.href='join'">JOIN</button>
+        </div>
+      </form>
+    </div>
+    <script></script>
   </body>
 </html>
