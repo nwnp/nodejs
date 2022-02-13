@@ -22,6 +22,7 @@ const PORT = 8080;
 // routing
 const indexRoute = require("./routes/index");
 const authRouter = require("./routes/auth");
+const postRouter = require("./routes/post");
 
 // connect database
 const { sequelize } = require("./models");
@@ -63,6 +64,7 @@ app.use(passport.session());
 
 app.use("/", indexRoute);
 app.use("/auth", authRouter);
+app.use("/posts", postRouter);
 
 // error
 app.use((err, req, res, next) => {
