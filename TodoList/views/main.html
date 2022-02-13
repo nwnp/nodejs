@@ -6,5 +6,21 @@
   </head>
   <body>
     <h1>MAIN PAGE</h1>
+    <input type="text" id="todo" placeholder="할 일 적기" />
+    <button id="btn" onclick="onClick()">BUTTON</button>
+    <br />
+    <div id="todo-list"></div>
   </body>
+  <script>
+    let itemList = [];
+
+    function onClick() {
+      const todo = document.getElementById("todo").value;
+      const item = todo;
+      itemList.append(item);
+      for (let i = 0; i < itemList.length; i++) {
+        document.getElementById("todo-list").innerHTML = item;
+      }
+    }
+  </script>
 </html>
