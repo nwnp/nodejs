@@ -50,6 +50,10 @@ const routes = [
     path: "/test-comp",
     component: () => import("../views/comp"),
   },
+  {
+    path: "*",
+    component: () => import("../components/NotFound.vue"),
+  },
 ];
 
 const router = new VueRouter({
