@@ -51,6 +51,10 @@ const routes = [
     component: () => import("../views/comp"),
   },
   {
+    path: "/test-family/props",
+    component: () => import("../views/family/props/Parent.vue"),
+  },
+  {
     path: "*",
     component: () => import("../components/NotFound.vue"),
   },
