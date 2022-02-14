@@ -6,6 +6,10 @@
       <router-link to="/test">Test</router-link> |
       <router-link to="/test-event">TestEvent</router-link> |
       <router-link to="/test-computed">TestComputed</router-link> |
+      <router-link to="/test-condition">TestCondition</router-link> |
+      <router-link to="/test-loop">TestLoop</router-link> |
+      <router-link to="/test-bootstrap">TestBootstrap</router-link> |
+      <router-link to="/test-comp">TestComp</router-link> |
     </div>
     <router-view />
   </div>

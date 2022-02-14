@@ -31,6 +31,25 @@ const routes = [
     name: "TestComputed",
     component: () => import("../views/TestComputed.vue"),
   },
+  {
+    path: "/test-condition",
+    name: "TestCondition",
+    component: () => import("../views/TestCondition.vue"),
+  },
+  {
+    path: "/test-loop",
+    name: "TestLoop",
+    component: () => import("../views/TestLoop.vue"),
+  },
+  {
+    path: "/test-bootstrap",
+    name: "TestBootstap",
+    component: () => import("../views/TestBootstrap.vue"),
+  },
+  {
+    path: "/test-comp",
+    component: () => import("../views/comp"),
+  },
 ];
 
 const router = new VueRouter({
