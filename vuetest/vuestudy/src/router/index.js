@@ -59,6 +59,14 @@ const routes = [
     component: () => import("../views/family/emit/Parent.vue"),
   },
   {
+    path: "/test-user/list",
+    component: () => import("../views/user/UserList.vue"),
+  },
+  {
+    path: "/test-user/info",
+    component: () => import("../views/user/UserInfo.vue"),
+  },
+  {
     path: "*",
     component: () => import("../components/NotFound.vue"),
   },

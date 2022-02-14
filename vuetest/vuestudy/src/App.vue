@@ -12,6 +12,8 @@
       <router-link to="/test-comp">TestComp</router-link> |
       <router-link to="/test-family/props">TestProps</router-link> |
       <router-link to="/test-family/emit">TestEmit</router-link> |
+      <router-link to="/test-user/list">TestList</router-link> |
+      <router-link to="/test-user/info">TestInfo</router-link> |
     </div>
     <router-view />
   </div>
