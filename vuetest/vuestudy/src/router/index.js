@@ -55,6 +55,10 @@ const routes = [
     component: () => import("../views/family/props/Parent.vue"),
   },
   {
+    path: "/test-family/emit",
+    component: () => import("../views/family/emit/Parent.vue"),
+  },
+  {
     path: "*",
     component: () => import("../components/NotFound.vue"),
   },
