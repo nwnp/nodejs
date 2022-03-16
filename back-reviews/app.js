@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const nunjucks = require("nunjucks");
 const dotenv = require("dotenv");
+const { sequelize } = require("./models");
 
 const pageRouter = require("./routes/page.js");
 
@@ -18,6 +19,15 @@ nunjucks.configure("views", {
   express: app,
   watch: true,
 });
+
+sequelize
+  .sync({ force: false })
+  .then(() => {
+    console.log("database connection success");
+  })
+  .catch((err) => {
+    console.error("database connection error");
+  });
 
 app.use(morgan("dev"));
 app.use(express.json());
