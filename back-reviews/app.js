@@ -5,14 +5,21 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const nunjucks = require("nunjucks");
 const dotenv = require("dotenv");
+const session = require("express-session");
 const { sequelize } = require("./models");
+// passport
+const passport = require("passport");
+const passportConfig = require("./passport");
 
 const pageRouter = require("./routes/page.js");
+const authRouter = require("./routes/auth.js");
 
 const app = express();
 const PORT = 8080;
 
 dotenv.config();
+// passport
+passportConfig();
 
 app.set("view engine", "html");
 nunjucks.configure("views", {
@@ -36,8 +43,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: "cookiesecret",
+    cookie: {
+      httpOnly: true,
+      secure: false,
+    },
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/", pageRouter);
+app.use("/auth", authRouter);
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);

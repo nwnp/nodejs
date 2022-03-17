@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
 
 router.use((req, res, next) => {
   res.locals.user = null;
@@ -17,11 +18,11 @@ router.get("/", (req, res) => {
   });
 });
 
-router.get("/join", (req, res, next) => {
+router.get("/join", isNotLoggedIn, (req, res, next) => {
   res.render("join", { title: "회원가입 - jin's page" });
 });
 
-router.get("/profile", (req, res, next) => {
+router.get("/profile", isLoggedIn, (req, res, next) => {
   res.render("profile", { title: "내 정보" });
 });
 
