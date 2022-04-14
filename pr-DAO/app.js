@@ -6,6 +6,8 @@ const express = require("express");
 const session = require("express-session");
 const dotenv = require("dotenv");
 
+const logRouter = require("./routes/test.js");
+
 const app = express();
 const PORT = 8080;
 
@@ -27,6 +29,8 @@ app.use(
     },
   })
 );
+
+app.use("/log-test", logRouter);
 
 app.listen(PORT, () => {
   console.log(PORT, "번에서 대기 중....");
