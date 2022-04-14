@@ -1,0 +1,18 @@
+layout.html
+  - 로그인 전 메인 홈페이지
+  - 로그인을 하더라도 {% if user and user.id %} 부분에 의해 왼쪽에 남아있음
+  - 렌더링할 때 user가 존재하면 사용자 정보와 팔로잉, 팔로워 수를 보여줌
+  - user가 존재하지 않으면 로그인 메뉴를 보여줌
+
+main.html
+  - user 변수가 존재할 때 게시글 업로드 폼을 보여줌
+
+N : M 관계
+  - 모델 이름과 컬럼 이름을 따로 정해야함
+  - 모델 이름이 UserUser일 수는 없으니, through 옵션을 사용해 생성할 모델 이름을 Follow로 지정
+  - as에 특정한 이름을 지정했으니, 관계 메서드를 사용할 수 있음
+    - user.getFollowers
+    - user.getFollowings 
+  - N:M 관계 테이블은 중간 테이블이 생김 -> 아래와 같이 접근가능
+    - db.sequelize.models.PostHashtag
+    - db.sequelize.models.Follow
