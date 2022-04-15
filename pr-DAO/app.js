@@ -5,6 +5,9 @@ const path = require("path");
 const express = require("express");
 const session = require("express-session");
 const dotenv = require("dotenv");
+const cors = require("cors");
+const corsConfig = require("./config/corsConfig.json");
+const models = require("./models/index.js");
 
 const logRouter = require("./routes/test.js");
 
@@ -12,6 +15,26 @@ const app = express();
 const PORT = 8080;
 
 dotenv.config();
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
+// sequelize sync
+models.sequelize.authenticate().then(() => {
+  logger.info("DB connection success");
+
+  models.sequelize
+    .sync()
+    .then(() => {
+      logger.info("Sequelize sync success");
+    })
+    .catch((err) => {
+      logger.error("Sequelize sync error", err);
+    });
+});
+
+// cors settings
+app.use(cors(corsConfig));
 
 app.use("/", express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: false }));
