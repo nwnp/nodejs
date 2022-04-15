@@ -20,7 +20,7 @@ module.exports = class Department extends Sequelize.Model {
         tableName: "departments",
         underscored: false,
         timestamps: true,
-        paranoid: true,
+        paranoid: false,
       }
     );
   }
