@@ -24,4 +24,11 @@ module.exports = class Department extends Sequelize.Model {
       }
     );
   }
+  static associate(db) {
+    db.Department.hasMany(db.User, {
+      foreignKey: { name: "departmentId" },
+      onDelete: "SET NULL",
+      as: "Users",
+    });
+  }
 };

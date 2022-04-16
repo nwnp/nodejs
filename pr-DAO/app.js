@@ -11,6 +11,7 @@ const models = require("./models/index.js");
 
 const logRouter = require("./routes/test.js");
 const departmentRouter = require("./routes/department.js");
+const userRouter = require("./routes/user.js");
 
 const app = express();
 const PORT = 8080;
@@ -56,6 +57,7 @@ app.use(
 
 app.use("/log-test", logRouter);
 app.use("/department", departmentRouter);
+app.use("/user", userRouter);
 
 app.listen(PORT, () => {
   console.log(PORT, "번에서 대기 중....");
