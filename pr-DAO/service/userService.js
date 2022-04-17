@@ -3,6 +3,53 @@ const userDao = require("../dao/userDao.js");
 const hashUtil = require("../lib/hashUtil.js");
 
 const service = {
+  async login(params) {
+    let user = null;
+
+    try {
+      user = await userDao.selectUser(params);
+      logger.debug(`(userService.login) ${JSON.stringify(user)}`);
+
+      if (!user) {
+        const err = new Error("Incorrect userId or password");
+        logger.error(err.toString());
+        return new Promise((resolve, reject) => {
+          reject(err);
+        });
+      }
+    } catch (error) {
+      logger.error(`(userService.login) ${error.toString()}`);
+      return new Promise((resolve, reject) => {
+        reject(error);
+      });
+    }
+
+    try {
+      const checkPasswordHash = await hashUtil.checkPasswordHash(
+        params.password,
+        user.password
+      );
+      logger.debug(`(userService.checkPassword) ${checkPassword}`);
+
+      if (!checkPassword) {
+        const err = new Error("Incorrect userId or password");
+        logger.error(err.toString());
+
+        return new Promise((resolve, reject) => {
+          reject(err);
+        });
+      }
+    } catch (error) {
+      logger.error(`(userService.checkPassword) ${err.toString()}`);
+      return new Promise((resolve, reject) => {
+        reject(error);
+      });
+    }
+
+    return new Promise((resolve) => {
+      resolve(user);
+    });
+  },
   async reg(params) {
     let inserted = null;
 

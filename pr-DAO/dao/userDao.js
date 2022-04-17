@@ -2,6 +2,21 @@ const { Op } = require("sequelize");
 const { User, Department } = require("../models/index.js");
 
 const dao = {
+  selectUser(params) {
+    return new Promise((resolve, reject) => {
+      User.findOne({
+        attributes: ["id", "userId", "password", "name", "role"],
+        where: { userId: params.userId },
+      })
+        .then((selectOne) => {
+          resolve(selectOne);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  },
+
   // register
   insert(params) {
     return new Promise((resolve, reject) => {
