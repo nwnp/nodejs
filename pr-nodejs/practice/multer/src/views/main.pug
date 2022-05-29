@@ -1,0 +1,13 @@
+html
+  head 
+    link(rel="stylesheet", href="/public/index.css")
+  body 
+    h1 multer test
+    h2.gold= message
+    div.big= nickname
+
+    h2 Image Upload 
+    img(src=userProfileImageURL).profileImage
+    form(action=`/${userId}/profile` method="POST" enctype="multipart/form-data") 
+      input(type="file" name="profile")
+      button Image Upload

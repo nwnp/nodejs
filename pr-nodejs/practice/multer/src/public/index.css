@@ -1,0 +1,15 @@
+.gold {
+  color: gold;
+}
+
+body {
+  background-color: gray;
+}
+
+.big {
+  font-size: 30px;
+}
+
+.profileImage {
+  width: 300px;
+}
