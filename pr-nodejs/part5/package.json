@@ -1,0 +1,21 @@
+{
+  "name": "part5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "nodemon app"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^9.3.0",
+    "express": "^4.18.1",
+    "pg": "^8.7.3",
+    "prompts": "^2.4.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
