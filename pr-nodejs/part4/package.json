@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "dependencies": {
+    "@pa12/jin-test-pkg": "^0.1.0"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "@pa12/jin-test-pkg",
+  "version": "0.1.3",
+  "main": "main.js",
+  "keywords": [
+    "util"
+  ],
+  "license": "MIT"
+}
